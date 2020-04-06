@@ -1,0 +1,89 @@
+<div class="container mt-5">
+  <div class="card shadow-sm bg-white">
+    <div class="row ml-0 mr-0 card-header bg-color">
+      <div class="col-md-10 text-primary">
+        <h4 class="ml-3 text-white">{{userdata.title}}</h4>
+      </div>
+      <div type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#createuser"
+        (click)="initUser()">
+        <i class="fas fa-plus-circle fa-lg"></i> &nbsp;Create User
+      </div>
+    </div>
+
+    <table class="table table-hover">
+      <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Salary</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      <tr *ngFor="let user of userdata.data">
+        <td *ngIf="!user.isEditable">{{user.id}}</td>
+        <td  *ngIf="user.isEditable">
+          <input type="text" class="form-control" [value]="user.id" readonly>
+        </td>
+        <td *ngIf="!user.isEditable">{{user.username}}</td>
+        <td *ngIf="user.isEditable">
+          <div class="form-group">
+            <input type="text" [(ngModel)]="user.username" placeholder="User Name" class="form-control">
+          </div>
+        </td>
+        <td *ngIf="!user.isEditable">{{user.salary}}</td>
+        <td *ngIf="user.isEditable">
+          <div class="form-group">
+            <input type="text" [(ngModel)]="user.salary" from placeholder="Salary" class="form-control">
+          </div>
+        </td>
+        <td *ngIf="!user.isEditable"> 
+          <!-- data-toggle="modal" data-target="#createuser" -->
+          <span (click)="getEditData(user)" class="text-primary text-center"><i class="fas fa-edit fa-lg"></i></span>
+        </td>
+        <td *ngIf="user.isEditable">
+          <button type="submit" class="btn bg-color text-white" (click)="saveData(user);user.isEditable=!user.isEditable">Save</button>
+        </td>
+        <td *ngIf="!user.isEditable" data-toggle="tooltip" title="Delete">&nbsp;&nbsp;<span class="text-danger text-center"
+            (click)="deletePlayer(user)">
+            <i class="fas fa-trash fa-lg"></i></span>
+        </td>
+        <td *ngIf="user.isEditable">
+          <button type="submit" class="btn bg-color text-white" (click)="user.isEditable=!user.isEditable">Cancel</button>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+<!-- The Create User Modal -->
+<div class="modal fade" id="createuser">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-color">
+        <h4 class="modal-title text-white">Create new user</h4>
+        <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+      </div>
+      <form [formGroup]="AdduserForm" (ngSubmit)="adduserdata(formFlag)">
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="username">User Name</label>
+            <input type="text" formControlName="username" placeholder="User Name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="Salary">Salary</label>
+            <input type="text" formControlName="salary" placeholder="Salary" class="form-control">
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn bg-color text-white">Create</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" #modalClose>Close</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

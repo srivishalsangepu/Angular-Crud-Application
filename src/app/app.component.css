@@ -1,0 +1,13 @@
+.bg-color{
+    background-color: #17587e;
+    color: #ffffff;
+}
+tr:hover{
+    background-color: oldlace;
+}
+tr:first-child:hover{
+    background-color: none;
+}
+input:read-only{
+    cursor: not-allowed;
+}
