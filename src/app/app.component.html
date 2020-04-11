@@ -2,37 +2,37 @@
   <div class="card shadow-sm bg-white">
     <div class="row ml-0 mr-0 card-header bg-color">
       <div class="col-md-10 text-primary">
-        <h4 class="ml-3 text-white">{{userdata.title}}</h4>
+        <h4 class="ml-3 text-white">Users List CRUD Application</h4>
       </div>
-      <div type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#createuser"
+      <div type="button" class="btn btn-sm btn-danger " data-toggle="modal" data-target="#createuser"
         (click)="initUser()">
-        <i class="fas fa-plus-circle fa-lg"></i> &nbsp;Create User
+        <h6><i class="fas fa-plus-circle fa-lg"></i> &nbsp;Create User</h6>
       </div>
     </div>
 
     <table class="table table-hover">
       <tr>
-        <th>ID</th>
+        <th>#ID</th>
         <th>User Name</th>
         <th>Salary</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
-      <tr *ngFor="let user of userdata.data">
-        <td *ngIf="!user.isEditable">{{user.id}}</td>
+      <tr *ngFor="let user of userdata; let i=index;">
+        <td *ngIf="!user.isEditable">#{{i+1}}</td>
         <td  *ngIf="user.isEditable">
-          <input type="text" class="form-control" [value]="user.id" readonly>
+          <input type="text" class="form-control" [value]="user.Id" readonly>
         </td>
-        <td *ngIf="!user.isEditable">{{user.username}}</td>
+        <td *ngIf="!user.isEditable">{{user.UserName}}</td>
         <td *ngIf="user.isEditable">
           <div class="form-group">
-            <input type="text" [(ngModel)]="user.username" placeholder="User Name" class="form-control">
+            <input type="text" [(ngModel)]="user.UserName" placeholder="User Name" class="form-control">
           </div>
         </td>
-        <td *ngIf="!user.isEditable">{{user.salary}}</td>
+        <td *ngIf="!user.isEditable">{{user.Salary}}</td>
         <td *ngIf="user.isEditable">
           <div class="form-group">
-            <input type="text" [(ngModel)]="user.salary" from placeholder="Salary" class="form-control">
+            <input type="text" [(ngModel)]="user.Salary" from placeholder="Salary" class="form-control">
           </div>
         </td>
         <td *ngIf="!user.isEditable"> 

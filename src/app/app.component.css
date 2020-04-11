@@ -11,3 +11,6 @@ tr:first-child:hover{
 input:read-only{
     cursor: not-allowed;
 }
+table{
+    margin: 0px !important;
+}
